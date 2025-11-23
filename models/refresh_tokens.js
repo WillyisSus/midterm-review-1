@@ -26,7 +26,7 @@ export default class refresh_tokens extends Model {
     sequelize,
     tableName: 'refresh_tokens',
     schema: 'public',
-    timestamps: true,
+    timestamps: false,
     indexes: [
       {
         name: "refresh_tokens_pkey",
