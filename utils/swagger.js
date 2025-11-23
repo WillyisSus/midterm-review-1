@@ -21,5 +21,4 @@ const routes = [
 
 /* NOTE: If you use distinct route files (e.g., routes/users.js), 
    include them here like: ['./routes/users.js', './routes/orders.js'] */
-
 swaggerAutogen(outputFile, routes, doc);

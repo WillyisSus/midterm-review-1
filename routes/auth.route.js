@@ -2,10 +2,11 @@ import {Router} from 'express';
 import authController from '../controllers/auth.controller.js';
 const authRoute = Router();
 
-authRoute.post('/login', authController.postOne)
-authRoute.post('/signup', authController.postOne)
-authRoute.post('/logout', authController.postOne)
-authRoute.post('/refreshToken', authController.postOne)
+authRoute.get('/users', authController.getAllUsers)
+authRoute.post('/login', authController.login)
+authRoute.post('/signup', authController.signUp)
+authRoute.post('/logout', authController.logout)
+authRoute.post('/refreshToken', authController.refreshToken)
 
 export default authRoute;
 

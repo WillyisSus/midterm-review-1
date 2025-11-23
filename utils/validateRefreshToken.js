@@ -14,6 +14,6 @@ export const validateRefreshToken = async (payload) =>{
         )
         return isValid
     } catch (error) {
-        return Promise.reject(error)
+        return Promise.reject(error);
     }
 }

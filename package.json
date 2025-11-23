@@ -24,11 +24,12 @@
   },
   "contributors": [],
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "node ./utils/swagger.js && nodemon index.js",
     "test": "",
     "generate-models": "npx sequelize-auto -o \"./models\" -d midterm-review-2 -h localhost -u myuser -x mypassword -p 5432 -e postgres -l esm "
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",

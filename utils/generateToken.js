@@ -10,16 +10,22 @@ import models from './db.js';
  *   password: "password"
  * }
  */
-const generateToken = async (payload) => {
+const generateAccessToken = async (payload) => {
     try {
-        const {userId, username, password} = payload
         const accessToken = jwt.sign(payload,
-            process.env.JWT_SECRET,
-            {expiresIn: `${process.env.ACCESS_TOKEN_SECRET}`}
+            process.env.ACCESS_TOKEN_SECRET,
+            {expiresIn: "15m"}
         )
+        return Promise.resolve(accessToken)
+    } catch (error) {
+        return Promise.reject(error)   
+    }
+}
+const generateRefreshToken = async (payload) => {
+    try {
         const refreshToken = jwt.sign(payload,
-            process.env.JWT_SECRET,
-            {expiresIn: `${process.env.REFRESH_TOKEN_SECRET}`}
+            process.env.REFRESH_TOKEN_SECRET,
+            {expiresIn: "7d"}
         )
         
         // 1. Find in the database if there is a refresh token record of userID
@@ -36,11 +42,10 @@ const generateToken = async (payload) => {
         }
         const newToken = models.refresh_tokens.build({user_id: userId, token: refreshToken})
         await newToken.save();
-        // Keep this
-        return Promise.resolve({accessToken, refreshToken})
+        // Keep this refresh token safe
+        return Promise.resolve(refreshToken)
     } catch (error) {
-        return Promise.reject(error)   
+        return Promise.reject(error);
     }
 }
-
-export default generateToken
+export default { generateAccessToken, generateRefreshToken }
